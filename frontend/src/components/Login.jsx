@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-import { Container, Form, Button, Alert, Card } from 'react-bootstrap';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -22,41 +21,45 @@ export default function Login() {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <Card className="auth-container">
-        <Card.Body>
-          <h2 className="text-center mb-4">Finlec Tasks</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Button variant="primary" type="submit" className="w-100">
-              Login
-            </Button>
-          </Form>
-          <div className="text-center mt-3">
-            <Link to="/signup">Don't have an account? Sign up</Link>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h1>Finlec Tasks</h1>
+        <div className="subtitle">Your Personal Task Keeper — Anytime, Anywhere!</div>
+
+        {error && <div className="error">{error}</div>}
+
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+            />
           </div>
-        </Card.Body>
-      </Card>
-    </Container>
+
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn">
+            LOGIN
+          </button>
+        </form>
+
+        <div className="footer-link">
+          Don't have an account? <Link to="/signup">Sign up</Link>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
 
 export default function TaskForm({ onSubmit, initialData, onCancel }) {
   const [title, setTitle] = useState('');
@@ -30,53 +29,46 @@ export default function TaskForm({ onSubmit, initialData, onCancel }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit} className="mb-4 p-4 bg-white rounded shadow-sm">
-      <Row>
-        <Col md={4}>
-          <Form.Group className="mb-3">
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Task title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </Form.Group>
-        </Col>
-        <Col md={4}>
-          <Form.Group className="mb-3">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={1}
-              placeholder="Optional"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-          </Form.Group>
-        </Col>
-        <Col md={2}>
-          <Form.Group className="mb-3">
-            <Form.Label>Status</Form.Label>
-            <Form.Select value={status} onChange={(e) => setStatus(e.target.value)}>
-              <option value="pending">Pending</option>
-              <option value="in progress">In Progress</option>
-              <option value="completed">Completed</option>
-            </Form.Select>
-          </Form.Group>
-        </Col>
-        <Col md={2} className="d-flex align-items-end">
-          <Button variant="primary" type="submit" className="me-2">
-            {initialData ? 'Update' : 'Add'} Task
-          </Button>
-          {initialData && (
-            <Button variant="secondary" onClick={onCancel}>
-              Cancel
-            </Button>
-          )}
-        </Col>
-      </Row>
-    </Form>
+    <form className="task-form" onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label>Title</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Task title"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Description</label>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Optional"
+          rows="1"
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Status</label>
+        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+          <option value="pending">Pending</option>
+          <option value="in progress">In Progress</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+
+      <button type="submit" className="btn">
+        {initialData ? 'Update Task' : 'Add Task'}
+      </button>
+
+      {initialData && (
+        <button type="button" className="btn btn-secondary" onClick={onCancel}>
+          Cancel
+        </button>
+      )}
+    </form>
   );
 }
