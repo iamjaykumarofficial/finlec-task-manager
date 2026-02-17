@@ -55,9 +55,7 @@ export default function Signup() {
             />
           </div>
 
-          <button type="submit" className="btn">
-            SIGN UP
-          </button>
+          <button type="submit" className="btn">SIGN UP</button>
         </form>
 
         <div className="footer-link">

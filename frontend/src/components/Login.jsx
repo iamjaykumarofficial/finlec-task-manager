@@ -51,9 +51,7 @@ export default function Login() {
             />
           </div>
 
-          <button type="submit" className="btn">
-            LOGIN
-          </button>
+          <button type="submit" className="btn">LOGIN</button>
         </form>
 
         <div className="footer-link">

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 import api from '../api/axios';
 
 const AuthContext = createContext();
@@ -7,18 +7,14 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
+  const [user, setUser] = useState(() => {
     const token = localStorage.getItem('token');
     const email = localStorage.getItem('email');
     if (token && email) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setUser({ email });
+      return { email };
     }
-    setLoading(false);
-  }, []);
+    return null;
+  });
 
   const login = async (email, password) => {
     const res = await api.post('/auth/login', { email, password });
@@ -38,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const value = { user, login, signup, logout, loading };
+  const value = { user, login, signup, logout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

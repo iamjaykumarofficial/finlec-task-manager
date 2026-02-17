@@ -9,15 +9,15 @@ export default function Dashboard() {
   const [tasks, setTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/immutability
-    fetchTasks();
-  }, []);
-
   const fetchTasks = async () => {
     const res = await api.get('/tasks');
     setTasks(res.data);
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchTasks();
+  }, []);
 
   const addTask = async (task) => {
     const res = await api.post('/tasks', task);
@@ -41,13 +41,12 @@ export default function Dashboard() {
         <h1>Finlec Tasks</h1>
         <div className="user-info">
           <span>Signed in as <strong>{user?.email}</strong></span>
-          <button className="logout-btn" onClick={logout}>
-            Logout
-          </button>
+          <button className="logout-btn" onClick={logout}>Logout</button>
         </div>
       </div>
 
       <TaskForm
+        key={editingTask ? editingTask.id : 'new'}
         onSubmit={editingTask ? (data) => updateTask(editingTask.id, data) : addTask}
         initialData={editingTask}
         onCancel={() => setEditingTask(null)}

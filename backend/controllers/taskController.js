@@ -8,6 +8,7 @@ exports.getTasks = async (req, res) => {
     );
     res.json(rows);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Server error' });
   }
 };
@@ -26,6 +27,7 @@ exports.createTask = async (req, res) => {
     const [newTask] = await db.execute('SELECT * FROM tasks WHERE id = ?', [result.insertId]);
     res.status(201).json(newTask[0]);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Server error' });
   }
 };
@@ -47,6 +49,7 @@ exports.updateTask = async (req, res) => {
     const [updated] = await db.execute('SELECT * FROM tasks WHERE id = ?', [id]);
     res.json(updated[0]);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Server error' });
   }
 };
@@ -61,6 +64,7 @@ exports.deleteTask = async (req, res) => {
     }
     res.json({ message: 'Task deleted' });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Server error' });
   }
 };

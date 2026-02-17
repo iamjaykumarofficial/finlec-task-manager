@@ -6,8 +6,7 @@ import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 
 function PrivateRoute({ children }) {
-  const { user, loading } = useAuth();
-  if (loading) return <div>Loading...</div>;
+  const { user } = useAuth();
   return user ? children : <Navigate to="/" />;
 }
 

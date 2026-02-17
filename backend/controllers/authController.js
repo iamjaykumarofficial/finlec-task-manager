@@ -19,6 +19,7 @@ exports.register = async (req, res) => {
     if (error.code === 'ER_DUP_ENTRY') {
       return res.status(409).json({ error: 'Email already exists' });
     }
+    console.error(error);
     res.status(500).json({ error: 'Server error' });
   }
 };
@@ -44,6 +45,7 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '7d' });
     res.json({ token, email: user.email });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Server error' });
   }
 };

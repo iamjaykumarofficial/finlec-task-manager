@@ -1,27 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export default function TaskForm({ onSubmit, initialData, onCancel }) {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('pending');
-
-  useEffect(() => {
-    if (initialData) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTitle(initialData.title);
-      setDescription(initialData.description || '');
-      setStatus(initialData.status);
-    } else {
-      setTitle('');
-      setDescription('');
-      setStatus('pending');
-    }
-  }, [initialData]);
+  // State is initialized once when component mounts
+  const [title, setTitle] = useState(initialData?.title || '');
+  const [description, setDescription] = useState(initialData?.description || '');
+  const [status, setStatus] = useState(initialData?.status || 'pending');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({ title, description, status });
     if (!initialData) {
+      // Clear form after adding a new task
       setTitle('');
       setDescription('');
       setStatus('pending');
