@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 export default function TaskForm({ onSubmit, initialData, onCancel }) {
-  // State is initialized once when component mounts
   const [title, setTitle] = useState(initialData?.title || '');
   const [description, setDescription] = useState(initialData?.description || '');
   const [status, setStatus] = useState(initialData?.status || 'pending');
@@ -29,7 +28,6 @@ export default function TaskForm({ onSubmit, initialData, onCancel }) {
           required
         />
       </div>
-
       <div className="form-group">
         <label>Description</label>
         <textarea
@@ -39,7 +37,6 @@ export default function TaskForm({ onSubmit, initialData, onCancel }) {
           rows="1"
         />
       </div>
-
       <div className="form-group">
         <label>Status</label>
         <select value={status} onChange={(e) => setStatus(e.target.value)}>
@@ -48,11 +45,9 @@ export default function TaskForm({ onSubmit, initialData, onCancel }) {
           <option value="completed">Completed</option>
         </select>
       </div>
-
       <button type="submit" className="btn">
         {initialData ? 'Update Task' : 'Add Task'}
       </button>
-
       {initialData && (
         <button type="button" className="btn btn-secondary" onClick={onCancel}>
           Cancel

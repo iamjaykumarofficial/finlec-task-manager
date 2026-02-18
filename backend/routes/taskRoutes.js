@@ -1,9 +1,10 @@
 const express = require('express');
 const { getTasks, createTask, updateTask, deleteTask } = require('../controllers/taskController');
-const authMiddleware = require('../middleware/authMiddleware');
+const authMiddleware = require('../middleware/authMiddleware');  // Fixed: Removed .default
+
 const router = express.Router();
 
-router.use(authMiddleware); // all routes below require authentication
+router.use(authMiddleware); // All routes below require authentication
 
 router.get('/', getTasks);
 router.post('/', createTask);

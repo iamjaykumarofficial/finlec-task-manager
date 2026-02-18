@@ -16,7 +16,7 @@ export default function Login() {
       await login(email, password);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed');
+      setError(err.response?.data?.error || 'Login failed. Please try again.');
     }
   };
 
@@ -25,9 +25,7 @@ export default function Login() {
       <div className="auth-card">
         <h1>Finlec Tasks</h1>
         <div className="subtitle">Your Personal Task Keeper — Anytime, Anywhere!</div>
-
         {error && <div className="error">{error}</div>}
-
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email</label>
@@ -39,7 +37,6 @@ export default function Login() {
               required
             />
           </div>
-
           <div className="form-group">
             <label>Password</label>
             <input
@@ -50,10 +47,8 @@ export default function Login() {
               required
             />
           </div>
-
           <button type="submit" className="btn">LOGIN</button>
         </form>
-
         <div className="footer-link">
           Don't have an account? <Link to="/signup">Sign up</Link>
         </div>

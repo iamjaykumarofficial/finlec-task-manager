@@ -32,7 +32,7 @@ body {
   padding: 1.5rem;
 }
 
-/* ===== Auth Pages (Login / Signup) ===== */
+/* Auth Pages */
 .auth-container {
   width: 100%;
   max-width: 440px;
@@ -59,21 +59,6 @@ body {
   color: var(--text-secondary);
   margin-bottom: 2rem;
   font-size: 1rem;
-}
-
-.auth-card .demo-email {
-  background: #f7fafc;
-  padding: 0.75rem;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--border);
-}
-
-.auth-card .demo-email span {
-  font-weight: 600;
-  color: var(--accent);
 }
 
 .auth-card .form-group {
@@ -159,7 +144,7 @@ body {
   text-align: left;
 }
 
-/* ===== Dashboard ===== */
+/* Dashboard */
 .dashboard {
   width: 100%;
   max-width: 1200px;
@@ -219,7 +204,7 @@ body {
   border-color: white;
 }
 
-/* ===== Task Form ===== */
+/* Task Form */
 .task-form {
   background: white;
   padding: 1.75rem;
@@ -294,7 +279,7 @@ body {
   background: #718096;
 }
 
-/* ===== Task Grid ===== */
+/* Task Grid */
 .task-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -402,13 +387,13 @@ body {
   font-size: 1.1rem;
 }
 
-/* ===== Animations ===== */
+/* Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== Mobile Responsive ===== */
+/* Mobile Responsive */
 @media (max-width: 640px) {
   body { padding: 1rem; }
   .auth-card { padding: 1.75rem; }
@@ -416,4 +401,63 @@ body {
   .task-form .form-group { width: 100%; }
   .dashboard-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .user-info { width: 100%; justify-content: space-between; }
+}
+
+/* Splash Screen */
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 9999;
+  animation: fadeOut 1s ease-in-out 2s forwards; /* Improved: Fade out after 2s */
+}
+
+.splash-screen h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1s ease;
+}
+
+.splash-screen p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  animation: fadeInUp 1s ease 0.3s both;
+}
+
+.spinner {
+  margin-top: 2rem;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
 }

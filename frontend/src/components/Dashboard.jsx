@@ -10,29 +10,45 @@ export default function Dashboard() {
   const [editingTask, setEditingTask] = useState(null);
 
   const fetchTasks = async () => {
-    const res = await api.get('/tasks');
-    setTasks(res.data);
+    try {
+      const res = await api.get('/tasks');
+      setTasks(res.data);
+    } catch (error) {
+      console.error('Error fetching tasks:', error);
+    }
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTasks();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addTask = async (task) => {
-    const res = await api.post('/tasks', task);
-    setTasks([res.data, ...tasks]);
+    try {
+      const res = await api.post('/tasks', task);
+      setTasks([res.data, ...tasks]);
+    } catch (error) {
+      console.error('Error adding task:', error);
+    }
   };
 
   const updateTask = async (id, updated) => {
-    const res = await api.put(`/tasks/${id}`, updated);
-    setTasks(tasks.map(t => t.id === id ? res.data : t));
-    setEditingTask(null);
+    try {
+      const res = await api.put(`/tasks/${id}`, updated);
+      setTasks(tasks.map(t => t.id === id ? res.data : t));
+      setEditingTask(null);
+    } catch (error) {
+      console.error('Error updating task:', error);
+    }
   };
 
   const deleteTask = async (id) => {
-    await api.delete(`/tasks/${id}`);
-    setTasks(tasks.filter(t => t.id !== id));
+    try {
+      await api.delete(`/tasks/${id}`);
+      setTasks(tasks.filter(t => t.id !== id));
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   };
 
   return (
@@ -44,14 +60,12 @@ export default function Dashboard() {
           <button className="logout-btn" onClick={logout}>Logout</button>
         </div>
       </div>
-
       <TaskForm
         key={editingTask ? editingTask.id : 'new'}
         onSubmit={editingTask ? (data) => updateTask(editingTask.id, data) : addTask}
         initialData={editingTask}
         onCancel={() => setEditingTask(null)}
       />
-
       <TaskList
         tasks={tasks}
         onEdit={setEditingTask}

@@ -19,7 +19,7 @@ export default function Signup() {
       setSuccess('Account created! Redirecting to login...');
       setTimeout(() => navigate('/'), 2000);
     } catch (err) {
-      setError(err.response?.data?.error || 'Signup failed');
+      setError(err.response?.data?.error || 'Signup failed. Please try again.');
     }
   };
 
@@ -28,10 +28,8 @@ export default function Signup() {
       <div className="auth-card">
         <h1>Create Account</h1>
         <div className="subtitle">Start managing your tasks today</div>
-
         {error && <div className="error">{error}</div>}
         {success && <div className="success">{success}</div>}
-
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email</label>
@@ -43,7 +41,6 @@ export default function Signup() {
               required
             />
           </div>
-
           <div className="form-group">
             <label>Password</label>
             <input
@@ -54,10 +51,8 @@ export default function Signup() {
               required
             />
           </div>
-
           <button type="submit" className="btn">SIGN UP</button>
         </form>
-
         <div className="footer-link">
           Already have an account? <Link to="/">Login</Link>
         </div>
