@@ -1,20 +1,24 @@
+// api/index.js
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const authRoutes = require('../routes/authRoutes');
-const taskRoutes = require('../routes/taskRoutes');
+const authRoutes = require('../backend/routes/authRoutes');
+const taskRoutes = require('../backend/routes/taskRoutes');
 
 const app = express();
 
 app.use(helmet());
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://*.vercel.app']
-}));
+app.use(cors()); // Vercel par simple cors() rakhein ya frontend URL dein
 app.use(express.json());
 
-// Routes
-app.use('/auth', authRoutes);  // Note: /api prefix not needed, since routes in vercel.json handle /api
-app.use('/tasks', taskRoutes);
+// API Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
 
-// Vercel serverless export
+// Root route for health check
+app.get('/api', (req, res) => {
+  res.send('Finlec API is running...');
+});
+
 module.exports = app;
