@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const api = axios.create({
-  // Vercel handles the proxy, so just use '/api'
   baseURL: import.meta.env.VITE_API_URL || '/api'
 });
 

@@ -18,7 +18,6 @@ exports.createTask = async (req, res) => {
   if (!title) {
     return res.status(400).json({ error: 'Title is required' });
   }
-  // Validate status
   const validStatuses = ['pending', 'in progress', 'completed'];
   const taskStatus = validStatuses.includes(status) ? status : 'pending';
 
@@ -43,7 +42,6 @@ exports.updateTask = async (req, res) => {
     if (task.length === 0) {
       return res.status(404).json({ error: 'Task not found' });
     }
-    // Validate status
     const validStatuses = ['pending', 'in progress', 'completed'];
     const taskStatus = validStatuses.includes(status) ? status : task[0].status;
 

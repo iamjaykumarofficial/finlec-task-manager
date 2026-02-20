@@ -20,7 +20,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchTasks();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addTask = async (task) => {

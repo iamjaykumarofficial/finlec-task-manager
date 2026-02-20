@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 3000); // 3 seconds splash
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 

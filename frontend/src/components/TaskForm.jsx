@@ -9,7 +9,6 @@ export default function TaskForm({ onSubmit, initialData, onCancel }) {
     e.preventDefault();
     onSubmit({ title, description, status });
     if (!initialData) {
-      // Clear form after adding a new task
       setTitle('');
       setDescription('');
       setStatus('pending');
